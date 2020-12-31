@@ -1,0 +1,53 @@
+{
+    "name": "slim/api",
+    "description": "Base project for api by slim",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rodomanov Roman",
+            "email": "romaxa83@ukr.net"
+        }
+    ],
+    "config": {
+        "process-timeout": 0,
+        "sort-packages": true
+    },
+    "require": {
+        "php": "^7.4|^8.0",
+        "ext-json": "*",
+        "doctrine/migrations": "^3.0",
+        "doctrine/orm": "^2.8",
+        "laminas/laminas-config-aggregator": "^1.4",
+        "middlewares/negotiation": "^2.0",
+        "monolog/monolog": "^1.24",
+        "php-di/php-di": "^6.0",
+        "ramsey/uuid": "^4.1",
+        "slim/psr7": "^1.3",
+        "slim/slim": "^4.1",
+        "symfony/config": "^5.2",
+        "symfony/console": "^5.2",
+        "symfony/translation": "^5.2",
+        "symfony/validator": "^5.2"
+    },
+    "require-dev": {
+        "dms/phpunit-arraysubset-asserts": "^0.2.1",
+        "doctrine/data-fixtures": "^1.4",
+        "phpunit/phpunit": "^9.5",
+        "roave/security-advisories": "dev-master",
+        "symfony/var-dumper": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "start": "php -S localhost:8080 -t public",
+        "test": "phpunit"
+    }
+}

@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  nginx:
+    build:
+      context: docker
+      dockerfile: dev/nginx/Dockerfile
+    container_name: slim-demo__nginx
+    hostname: slim-demo__nginx
+    volumes:
+      - ./:/app
+      - ./var/logs:/var/log/nginx
+    ports:
+      - 192.168.150.1:80:80
+    restart: always
+
+  php-fpm:
+    build:
+      context: docker
+      dockerfile: dev/php-fpm/Dockerfile
+    container_name: slim-demo__php-fpm
+    hostname: slim-demo__php-fpm
+    environment:
+      TERM: xterm-256color
+    volumes:
+      - ./:/app
+      - ./docker/dev/php/.bashrc:/root/.bashrc
+      - ./docker/dev/php/.bash_aliases:/root/.bash_aliases
+
+  db:
+    image: mysql:8
+    container_name: slim-demo__db
+    hostname: slim-demo__db
+    restart: always
+    environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db_demo
+    ports:
+      - 192.168.150.1:3306:3306
+    volumes:
+      - ./var/db:/var/lib/mysql
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.150.0/24 
